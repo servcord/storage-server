@@ -6,7 +6,7 @@ import FilesystemAdapter from "providers/FilesystemProvider";
 // for example, an ftp server or a proxy or something.
 const currentProvider: IProvider = new FilesystemAdapter(process.cwd()+"/data");
 const options = {
-	port: 8888
+	port: 80
 };
 const requestListener: http.RequestListener = function (req, res) {
 	// catch cases where there is no req.url
@@ -73,8 +73,7 @@ const requestListener: http.RequestListener = function (req, res) {
 					res.write(Buffer.from("success"), ()=>{
 						res.end();
 					});
-				}).catch((e)=>{
-					console.error(e);
+				}).catch(()=>{
 					res.writeHead(500);
 					res.write(Buffer.from("error"), ()=>{
 						res.end();
@@ -89,7 +88,7 @@ const requestListener: http.RequestListener = function (req, res) {
 			res.write(Buffer.from("success"), ()=>{
 				res.end();
 			});
-		}).catch((e)=>{
+		}).catch(()=>{
 			res.writeHead(500);
 			res.write(Buffer.from("error"), ()=>{
 				res.end();
@@ -108,6 +107,7 @@ const requestListener: http.RequestListener = function (req, res) {
 // well, because it doesn't need to. 
 // this is assumed to run on your internal network without public access.
 // revealing this to the internet is a fool's errand. 
+// if you need it to go via the internet, use a vpn
 const server = http.createServer(requestListener);
 server.listen(options.port);
 console.log("Storage server listening on: "+options.port);
