@@ -6,7 +6,7 @@ import FilesystemAdapter from "providers/FilesystemProvider";
 // for example, an ftp server or a proxy or something.
 const currentProvider: IProvider = new FilesystemAdapter(process.cwd()+"/data");
 const options = {
-	port: 80
+	port: 8866
 };
 const requestListener: http.RequestListener = function (req, res) {
 	// catch cases where there is no req.url
