@@ -1,4 +1,5 @@
 # Storage server
+# ARCHIVED: Rewrite
 Basically a database for Campfire.
 
 ## Developing
